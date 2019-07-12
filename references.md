@@ -2,6 +2,7 @@
 issue | cure
 -|-
 Install for prefix@latest failed with code 1 | https://github.com/zkat/npx/issues/146
+Warning: xcodebuild exists but failed to execute | sudo /usr/bin/xcode-select -switch /Applications/Xcode.app
 # radio
 主题 | 参考
 -|-
