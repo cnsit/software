@@ -83,26 +83,19 @@ c.prototype.constructor = c;
 # 模块与引用
 ## js 模块加载函数
 ```js
-var elapse = 0;
-var timeout = 2000;
-function load_module(path, global, cb){
+function load_module(path, name, require, cb){
+  if(typeof window[require] === 'undefined'){
+      load_module(require, require, null, load_module());
+      return;
+  }
   var node = document.createElement('script');
   node.type = 'text/javascript';
   node.async = true;
   node.src = path;
   node.onload = function(){
-    if(typeof window[global] === 'undefined'){
-      elapse += interval;
-      if(elapse>=timeout){
-        throw 'timeout loaindg module.';
-      }
-      setTimeout(function(){
-        load_module(cb)
-      }, 10);
-    }else{
-      if(cb){
-        cb(window[global]);
-      }
+    //path.js will set window[name] to itself
+    if(cb){
+      cb(window[name]);
     }
   }
   var head = document.getElementsByTagName('head')[0];
