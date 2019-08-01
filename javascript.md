@@ -1,5 +1,5 @@
 # 原型链与继承
-## Object
+## 原型链
 - **`typeof Object`** `==>` _`function`_
 - **`typeof Object.prototype`** `==>` _`object`_
 - prototype 用于**定义**，便于后续派生的共享
@@ -12,5 +12,6 @@
 - **`function f(){}`**
 - **`typeof f.prototype`** `==>` _`object`_
 - **`typeof f.prototype.constructor`** `==>` _`function`_ 即函数定义本身，new 的时候调用
-- **`typeof f.__proto__ === Function.prototype`** `==>` _`true`_
+- **`f.__proto__ === Function.prototype`** `==>` _`true`_
 - **`Function.prototype.__proto__ === Object.prototype`** `==>` _`true`_ 函数的原型派生自 Object 的原型
+## 继承
