@@ -80,6 +80,25 @@ c.prototype.constructor = c;
 - 实现上略复杂
 - 还是调用两次构造函数（但是原型对象上的调用没有重复初始化父类的成员）
 
+
+# 异步与回调
+## Promise
+```js
+function load_js(path, cb){
+  var node = document.createElement('script');
+  node.type = 'text/javascript';
+  node.async = true;
+  node.src = path;
+  node.onload = function(){
+    if(cb){
+      cb(path);
+    }
+  }
+}
+function work(resolve, reject){
+    
+}
+```
 # 模块与引用
 ## js 模块加载函数
 ```js
@@ -102,5 +121,3 @@ function load_module(path, name, require, cb){
   head.appendChild(node);
 }
 ```
-# 异步与回调
-## Promise
