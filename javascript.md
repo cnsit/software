@@ -102,3 +102,5 @@ function load_module(path, name, require, cb){
   head.appendChild(node);
 }
 ```
+# 异步与回调
+## Promise
