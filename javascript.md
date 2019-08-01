@@ -32,6 +32,7 @@ function c(){
   this.role = 'child';
 }
 c.prototype = new p();
+c.prototype.constructor = c;
 ```
 缺点：
 - 无法实现多继承
@@ -40,10 +41,37 @@ c.prototype = new p();
 ### 构造函数
 ```js
 function c(n){
-  p.call(this);
+  p.call(this, n);
   this.role = 'child';
 }
 ```
 缺点：
 - 子类（c）的实例不是父类（p）的实例：instance of p 是 false
 - 原型方法（process）无法被继承，而实例方法（get）会被复制到每个实例中
+### 组合继承
+```js
+function c(n){
+  p.call(this, n);
+  this.role = 'child';
+}
+c.prototype = new p();
+c.prototype.constructor = c;
+```
+缺点：
+- 调用了两次父类（p）的构造函数
+### 完美继承
+```js
+function c(n){
+  p.call(this, n);
+  this.role = 'child';
+}
+(function(){
+  var temp = function(){}
+  temp.prototype = p.prototype;
+  c.prototype = new temp();
+})();
+c.prototype.constructor = c;
+```
+缺点：
+- 实现上略复杂
+- 还是调用两次构造函数（但是原型对象上的调用没有重复初始化父类的成员）
