@@ -15,3 +15,21 @@
 - **`f.__proto__ === Function.prototype`** `==>` _`true`_
 - **`Function.prototype.__proto__ === Object.prototype`** `==>` _`true`_ 函数的原型派生自 Object 的原型
 ## 继承
+```js
+function p(n){
+  this.role = 'parent';
+  this.name = n || '';
+  this.keywords = [];
+}
+```
+### 原型链
+```js
+function c(){
+  this.role = 'child';
+}
+c.prototype = new p();
+```
+缺点：
+- 无法实现多继承
+- 无法向父类构造函数传递参数
+- 引用类型成员 keywords 会被所有c的实例共享，修改一个会使另一个也同时被修改
