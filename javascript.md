@@ -79,3 +79,33 @@ c.prototype.constructor = c;
 缺点：
 - 实现上略复杂
 - 还是调用两次构造函数（但是原型对象上的调用没有重复初始化父类的成员）
+
+# 模块与引用
+## js 模块加载函数
+```js
+var elapse = 0;
+var timeout = 2000;
+function load_module(path, global, cb){
+  var node = document.createElement('script');
+  node.type = 'text/javascript';
+  node.async = true;
+  node.src = path;
+  node.onload = function(){
+    if(typeof window[global] === 'undefined'){
+      elapse += interval;
+      if(elapse>=timeout){
+        throw 'timeout loaindg module.';
+      }
+      setTimeout(function(){
+        load_module(cb)
+      }, 10);
+    }else{
+      if(cb){
+        cb(window[global]);
+      }
+    }
+  }
+  var head = document.getElementsByTagName('head')[0];
+  head.appendChild(node);
+}
+```
