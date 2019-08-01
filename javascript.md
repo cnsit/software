@@ -80,3 +80,25 @@ c.prototype.constructor = c;
 - 实现上略复杂
 - 还是调用两次构造函数（但是原型对象上的调用没有重复初始化父类的成员）
 
+# 模块与引用
+## js 模块加载函数
+```js
+function load_module(path, name, require, cb){
+  if(typeof window[require] === 'undefined'){
+      load_module(require, require, null, load_module());
+      return;
+  }
+  var node = document.createElement('script');
+  node.type = 'text/javascript';
+  node.async = true;
+  node.src = path;
+  node.onload = function(){
+    //path.js will set window[name] to itself
+    if(cb){
+      cb(window[name]);
+    }
+  }
+  var head = document.getElementsByTagName('head')[0];
+  head.appendChild(node);
+}
+```
