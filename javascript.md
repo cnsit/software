@@ -1,5 +1,9 @@
 # 原型链与继承
 ## 原型链
+- Object.prototype 是所有对象和函数的原型对象
+- Function.prototype 是所有函数的原型对象，其原型就是 Object.prototype
+- Object 也是个函数
+- 所有的实例都有 __proto__ 指向其所派生自的原型 prototype
 - **`typeof Object`** `==>` _`function`_
 - **`typeof Object.prototype`** `==>` _`object`_
 - prototype 用于**定义**，便于后续派生的共享
