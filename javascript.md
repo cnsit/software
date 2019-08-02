@@ -94,12 +94,19 @@ function promise_js(path, cb){
       if(cb){
         cb(path);
       }
+      resolve(path);
+    }
+    node.onerror = function(){
+      reject(path);
     }
     var head = document.getElementsByTagName('head')[0];
     head.appendChild(node);
   });
 }
-promise_js('j1.js').then(function(){return promise_js('j2.js');});
+promise_js('j1.js').then(
+  function(path){return promise_js('j2.js');},
+  function(err){console.log(err);}
+);
 ```
 缺点：
 - 只能确保文件/资源加载顺序，而无法保证文件内容执行完成
