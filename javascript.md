@@ -84,21 +84,28 @@ c.prototype.constructor = c;
 # 异步与回调
 ## Promise
 ```js
-function load_js(path, cb){
-  var node = document.createElement('script');
-  node.type = 'text/javascript';
-  node.async = true;
-  node.src = path;
-  node.onload = function(){
-    if(cb){
-      cb(path);
+function promise_js(path, cb){
+  return new Promise((resolve, reject)=> {
+    var node = document.createElement('script');
+    node.type = 'text/javascript';
+    node.async = true;
+    node.src = path;
+    node.onload = function(){
+      if(cb){
+        cb(path);
+      }
     }
-  }
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(node);
+  });
 }
-function work(resolve, reject){
-    
-}
+promise_js('j1.js').then(function(){return promise_js('j2.js');});
 ```
+缺点：
+- 只能确保文件/资源加载顺序，而无法保证文件内容执行完成
+- 写法怪异，且相比于回掉函数嵌套而言并没有变得简洁多少
+## 回调
+
 # 模块与引用
 ## js 模块加载函数
 ```js
