@@ -84,6 +84,24 @@ c.prototype.constructor = c;
 # 异步与回调
 ## Promise
 ```js
+//j1.js
+var j1;
+setTimeout(function() {
+	j1 = function() {
+		console.log('j1');
+	}
+	var v1 = new j1();
+}, 300);
+```
+```js
+//j2.js
+function j2(){
+	console.log('j2');
+}
+var v2 = new j2();
+var v3 = new j1();
+```
+```js
 function promise_js(path, cb){
   return new Promise((resolve, reject)=> {
     var node = document.createElement('script');
