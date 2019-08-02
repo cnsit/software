@@ -131,65 +131,65 @@ promise_js('j1.js').then(
 - 写法怪异，且相比于回掉函数嵌套而言并没有变得简洁多少
 ## 回调
 ```js
-function has_module(module){
-	var head = document.getElementsByTagName('head')[0];
-	for(var i=0;i<head.childElementCount;i++){
-		var s = head.children[i];
-		if(s.tagName === 'SCRIPT' && s.src.indexOf('/'+module.path)>=0){
-			return s.src;
-		}
-	}
-	return false;
-}
-function load_requires(module, global, cb, times){
-	if(Array.isArray(module.requires) && typeof global!=='undefined'){
-		for(var i = 0;i<module.requires.length; i++){
-			if(typeof global[module.requires[i].name] === 'undefined'){ //not loaded or not executed
-				if(!has_module(module.requires[i])){
-					load_module(module.requires[i], global, function(){
-						load_module(module, global, cb, times);
-					});
-					return false;
-				}else{
-					if(typeof times !== 'number') times = 0;
-					if(times>=100){
-						throw 'Timeout loading module:'+module.name;
-					}
-					setTimeout(function(){
-						load_module(module, global, cb, times+1);
-					}, 10);
-					return false;
-				}
-			}
-		}
-	}
-	return true;
-}
-function load_module(module, global, cb, times) {
-	if(!load_requires(module, global, cb, times)){
-		return;
-	}
-	var node = document.createElement('script');
-	node.type = 'text/javascript';
-	node.async = true;
-	node.src = module.path;
-	node.onload = function() {
-		if (cb) {
-			cb(module);
-		}
-	}
-	var head = document.getElementsByTagName('head')[0];
-	head.appendChild(node);
-}
-load_module({path:'j2.js', name:'j2', requires:[{name:'j1', path:'j1.js'}]}, window, function(){
-	console.log('all done!');
-});
+  function has_module(module){
+    var head = document.getElementsByTagName('head')[0];
+    for(var i=0;i<head.childElementCount;i++){
+      var s = head.children[i];
+      if(s.tagName === 'SCRIPT' && s.src.indexOf('/'+module.path)>=0){
+        return s.src;
+      }
+    }
+    return false;
+  }
+  function load_requires(module, global, cb, times){
+    if(Array.isArray(module.requires) && typeof global!=='undefined'){
+      for(var i = 0;i<module.requires.length; i++){
+        if(typeof global[module.requires[i].name] === 'undefined'){ //not loaded or not executed
+          if(!has_module(module.requires[i])){
+            load_module(module.requires[i], global, function(){
+              load_module(module, global, cb, times);
+            });
+            return false;
+          }else{
+            if(typeof times !== 'number') times = 0;
+            if(times>=100){
+              throw 'Timeout loading module:'+module.name;
+            }
+            setTimeout(function(){
+              load_module(module, global, cb, times+1);
+            }, 10);
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+  function load_module(module, global, cb, times) {
+    if(!load_requires(module, global, cb, times)){
+      return;
+    }
+    var node = document.createElement('script');
+    node.type = 'text/javascript';
+    node.async = true;
+    node.src = module.path;
+    node.onload = function() {
+      if (cb) {
+        cb(module);
+      }
+    }
+    var head = document.getElementsByTagName('head')[0];
+    head.appendChild(node);
+  }
+  load_module({path:'j2.js', name:'j2', requires:[{name:'j1', path:'j1.js'}]}, window, function(){
+    console.log('all done!');
+  });
 ```
 缺点：
 - 需要加载模块时，预先指定所依赖的其它模块，如果能在模块内部指定，由模块自行加载会更好
 
 # 模块与引用
-##模块定义
+## 模块定义
 ```js
 
 ```
