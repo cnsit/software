@@ -1,6 +1,7 @@
 
  [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 
+不要用你不理解的东西。 || Don't Use What You Don't Understand.
 
 # 原型链与继承
 ## 原型链
