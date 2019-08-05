@@ -19,6 +19,7 @@
 - **`f.__proto__ === Function.prototype`** `==>` _`true`_
 - **`Function.prototype.__proto__ === Object.prototype`** `==>` _`true`_ 函数的原型派生自 Object 的原型
 ## 继承
+下面先定义实例用的父类：
 ```js
 function p(n){
   this.role = 'parent';
