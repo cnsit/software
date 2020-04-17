@@ -1,2 +1,2 @@
 
-- [原型链与继承](prototype.CN.md)
+- [原型链与继承](prototype.md)
