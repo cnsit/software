@@ -4,7 +4,7 @@ const f = require('fastify')({
 f.get('/',(req,res)=>{
 	res.send('Hello World! Fastify')
 })
-f.listen(3000,(err,addr)=>{
+f.listen(3000,'0.0.0.0',(err,addr)=>{
 	if(err)throw err
 	f.log.info(`server listen on ${addr}`)
 })
