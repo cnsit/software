@@ -10,6 +10,7 @@
 -   [JavaScript](javascript/README.md)
 -   [NodeJs](nodejs/README.md)
 -   [SpaceVim](vim/spacevim.md)
+-   [Spacemacs](emacs/README.md)
 
 # 参考资料
 
