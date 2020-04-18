@@ -1,3 +1,21 @@
+## 基础
+
+-   查看版本
+
+```bash
+node -v
+```
+
+-   更新版本
+
+```bash
+npm cache clean -f
+```
+
+## 无法更新 npm 模块的时候
+
+-   npm config set https-proxy="http://proxy.xxx.com:80"
+
 ## Web 服务器
 
 位于 server 文件夹下
